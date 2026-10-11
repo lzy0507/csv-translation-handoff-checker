@@ -1,0 +1,12 @@
+id,source,translation
+start,Start,开始
+quest,Collect 5 apples,收集5个苹果
+removed,Old quest,
+missing,Open inventory,
+blank,Close window,关闭窗口
+concurrent,Save game,存档
+duplicate,First source,
+duplicate,Second source,
+unicode,"你好,
+""勇者""",
+escaped,<img src=x onerror=alert(1)>,
