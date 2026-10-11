@@ -1,0 +1,36 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'"><title>CSV译文回收检查报告</title><style>body{font:16px/1.65 system-ui,sans-serif;color:#223247;background:#f7f9fc;margin:0;padding:28px}main{max-width:1120px;margin:auto}h1{font-size:28px}h2{margin-top:32px}.banner{padding:16px;background:#fff0cb;border-left:5px solid #d19a20}.cards{display:flex;flex-wrap:wrap;gap:12px;margin:24px 0}.card{background:white;padding:14px;min-width:115px;border:1px solid #d6dfe8}.card b{display:block;font-size:26px}table{width:100%;border-collapse:collapse;background:white}td,th{border:1px solid #d6dfe8;padding:10px;text-align:left;vertical-align:top;overflow-wrap:anywhere}th{background:#eaf0f7}pre{white-space:pre-wrap;margin:0;font:inherit;overflow-wrap:anywhere}.muted{color:#526477}code{overflow-wrap:anywhere}a{color:#185fa6}@media(max-width:600px){body{padding:12px}td,th{padding:6px}}</style></head><body><main><h1>CSV译文回收检查报告</h1><p class="muted">只读检查 · 不翻译 · 不合并 · 不自动导入</p><div class="banner">报告列出需要核对的变化与风险，不判断译文质量。一个ID可能出现在多项检查中，计数不能相加当作错误总数。</div><div class="cards"><a class="card" href="#added">新增ID<b>1</b></a><a class="card" href="#deleted">删除ID<b>1</b></a><a class="card" href="#changed">修改文本<b>2</b></a><a class="card" href="#missing">缺失翻译<b>3</b></a><a class="card" href="#duplicate">重复ID<b>1</b></a><a class="card" href="#risk">潜在错误覆盖<b>7</b></a></div><p class="banner">重复ID涉及的条目不执行文本、缺译推断；所有重复位置已列出，不能视作已通过。</p><h2 id="added">新增ID (1)</h2><table><thead><tr><th>ID</th><th>判断依据</th><th>详情</th></tr></thead><tbody><tr><td>added</td><td>新源文件出现；没有旧送译基线</td><td><pre></pre></td></tr></tbody></table><h2 id="deleted">删除ID (1)</h2><table><thead><tr><th>ID</th><th>判断依据</th><th>详情</th></tr></thead><tbody><tr><td>removed</td><td>旧源文件存在，新源文件已无此ID</td><td><pre></pre></td></tr></tbody></table><h2 id="changed">修改文本 (2)</h2><table><thead><tr><th>ID</th><th>判断依据</th><th>详情</th></tr></thead><tbody><tr><td>escaped</td><td>原文精确比较不同（含空格/换行）</td><td><pre>旧：&lt;img src=x onerror=alert(1)&gt;
+新：&lt;script&gt;alert(1)&lt;/script&gt;</pre></td></tr><tr><td>quest</td><td>原文精确比较不同（含空格/换行）</td><td><pre>旧：Collect 5 apples
+新：Collect 10 apples</pre></td></tr></tbody></table><h2 id="missing">缺失翻译 (3)</h2><table><thead><tr><th>ID</th><th>判断依据</th><th>详情</th></tr></thead><tbody><tr><td>added</td><td>返回文件缺少该ID</td><td><pre>表示本次回收缺失，不等于项目从未有译文；不会清空现有译文。</pre></td></tr><tr><td>blank</td><td>返回译文为空/仅空白</td><td><pre>表示本次回收缺失，不等于项目从未有译文；不会清空现有译文。</pre></td></tr><tr><td>missing</td><td>返回文件缺少该ID</td><td><pre>表示本次回收缺失，不等于项目从未有译文；不会清空现有译文。</pre></td></tr></tbody></table><h2 id="duplicate">重复ID (1)</h2><table><thead><tr><th>ID</th><th>判断依据</th><th>详情</th></tr></thead><tbody><tr><td>duplicate</td><td>old_source重复2次；不选第一条或最后一条</td><td><pre>记录结束行：8, 9</pre></td></tr></tbody></table><h2 id="risk">潜在错误覆盖 (7)</h2><table><thead><tr><th>ID</th><th>判断依据</th><th>详情</th></tr></thead><tbody><tr><td>blank</td><td>空译文若直接回填可能清空原有内容；本工具不执行回填</td><td><pre>送译时原文：Close window
+送译时译文：关闭窗口
+
+当前原文：Close window
+当前译文：关闭窗口
+
+返回原文：Close window
+返回译文：</pre></td></tr><tr><td>concurrent</td><td>当前译文已被修改，直接回填可能覆盖该修改</td><td><pre>送译时原文：Save game
+送译时译文：存档
+
+当前原文：Save game
+当前译文：保存游戏
+
+返回原文：Save game
+返回译文：储存游戏</pre></td></tr><tr><td>duplicate</td><td>ID重复，无法确定对应关系，必须人工核对</td><td><pre></pre></td></tr><tr><td>escaped</td><td>送译后原文改变，返回译文可能已过期</td><td><pre>送译时原文：&lt;img src=x onerror=alert(1)&gt;
+送译时译文：
+
+当前原文：&lt;script&gt;alert(1)&lt;/script&gt;
+当前译文：
+
+返回原文：&lt;img src=x onerror=alert(1)&gt;
+返回译文：测试文本</pre></td></tr><tr><td>quest</td><td>送译后原文改变，返回译文可能已过期</td><td><pre>送译时原文：Collect 5 apples
+送译时译文：收集5个苹果
+
+当前原文：Collect 10 apples
+当前译文：收集5个苹果
+
+返回原文：Collect 5 apples
+返回译文：收集五个苹果</pre></td></tr><tr><td>removed</td><td>返回ID已删除</td><td><pre>送译时原文：Old quest
+送译时译文：
+
+返回原文：Old quest
+返回译文：旧任务</pre></td></tr><tr><td>unknown</td><td>返回ID未知（两份源文件都没有）</td><td><pre>返回原文：Unlisted
+返回译文：未登记</pre></td></tr></tbody></table><h2>未检出上述风险的返回条目</h2><p>仅表示在提供的三份文件与已启用规则范围内未检出；不等于可直接导入，不验证语言、语义、占位符或富文本。</p><p>start, unicode</p><p>重复ID导致缺译判断跳过：duplicate</p><h2>输入追溯</h2><p>SHA-256对应读取时的字节。报告包含原文与ID，分享前请自行复核。</p><table><tr><th>角色 / 文件</th><th>记录数</th><th>SHA-256</th></tr><tr><td>old_source / old_source.csv</td><td>10</td><td><code>ffaf1da5ceb3bb06474d8fe52bb7f98af2e72ee246205ea8bc823bfe757a4743</code></td></tr><tr><td>new_source / new_source.csv</td><td>9</td><td><code>589bd4cbd590a78df09cedb6740ed38ab009b0da0958fe2e26769904c58f5e92</code></td></tr><tr><td>returned_translation / returned_translation.csv</td><td>9</td><td><code>12f8dd210304756a456285c7d82c9cc4e842ecfc83a89b167ba5d2a169720dea</code></td></tr></table></main></body></html>
